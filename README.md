@@ -2,13 +2,13 @@
 
 Customizable lifetime clock. [Try it yourself!](https://ooz.github.io/lifetime-clock/)
 
-![Screenshot](screenshot.png)
+[![Screenshot](screenshot.png)](https://ooz.github.io/lifetime-clock/)
 
 [Example configuration](https://ooz.github.io/lifetime-clock/?workingHoursPerWeek=40&regularHoursPerWeek=70&hourlyNet=12) (for more options, check "Show options" on the site)
 
-## License (MIT)
+## License
 
-See [LICENSE] file for details.
+See [LICENSE](LICENSE) (MIT) file for details.
 
 The files:
 
