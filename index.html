@@ -76,7 +76,7 @@
                 </tr>
                 <tr>
                   <td><code>workingHoursPerWeek</code></td>
-                  <td>Working hours per week, e.g. <code>37.5</code>. This is subtracted from your time, but used for your monetary budget. Default: <code>0</code></td>
+                  <td>Working hours per week, e.g. <code>34.5</code>. This is subtracted from your time, but used for your monetary budget. Mind your vacation days and national holidays, so reduce your <code>workingHoursPerWeek</code> and increase your <code>hourlyNet</code> accordingly! Default: <code>0</code></td>
                 </tr>
                 <tr>
                   <td><code>retirementDate</code></td>
@@ -97,7 +97,7 @@
               <tbody class="alert alert-danger">
                 <tr>
                   <td><code>hourlyNet</code><p class="blockquote-footer">works, but yearly raises (innovationRate) and inflation still need to be considered</p></td>
-                  <td>Hourly net income, e.g. <code>13.37</code>. Default: <code>0</code></td>
+                  <td>Hourly net income, e.g. <code>13.37</code>. Mind your vacation days and national holidays, so reduce your <code>workingHoursPerWeek</code> and increase your <code>hourlyNet</code> accordingly! Default: <code>0</code></td>
                 </tr>
                 <tr>
                   <td><code>monthlyExpenses</code></td>
@@ -124,7 +124,7 @@
             <div class="alert-warning">
               <h6>Disclaimer</h6>
               <p>
-                There are rounding errors due to using JavaScript Number objects instead of more mathematically accurate number representations. Also you might live longer or die earlier. Who knows? ¯\_(ツ)_/¯
+                Timezone handling is ignored for now and there are rounding errors due to using JavaScript Number objects instead of more mathematically accurate number representations. Also you might live longer or die earlier. Who knows? ¯\_(ツ)_/¯
               </p>
             </div>
 
