@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lifetime Clock</title>
+    <style>
+#manual {
+  display: none;
+}
+#customization_toggle:checked ~ #manual {
+  display: block;
+}
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="row">
+        <div class="container">
+          <h1 id="headline" class="display-2 float-left"><span class="alert-warning">Uh, please enable JavaScript!</span></h1>
+          <img id="angus" class="rounded float-right" alt="Tick Tock Tick!" src="angus96.gif" hidden /> <!-- Cropped and re-timed based on source: https://giphy.com/gifs/acdc-angus-young-TIQKh7HNFvTmo -->
+        </div>
+      </div>
+
+      <!-- Clock -->
+      <div class="row" style="margin-top:4.2em;">
+        <div class="container">
+          <h3>Time left</h3>
+          <table class="table table-hover">
+            <tbody>
+              <tr><th scope="row" style="width: 23%">...in hours:mm:ss</th><td id="time_left" class="h1" style="font-family:monospace;font-weight:bold;"></td></tr>
+              <tr><th scope="row">...in days</th><td id="days_left" class="h1" style="font-family:monospace;font-weight:bold;"></td></tr>
+              <tr><th scope="row">...in weeks</th><td id="weeks_left" class="h1" style="font-family:monospace;font-weight:bold;"></td></tr>
+              <tr id="effective_time_row" hidden><th scope="row">...unbound</th><td id="effective_time_left" class="h3" style="font-family:monospace;font-weight:bold;"></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="time_converted_to_money" class="container" style="margin-top:3.6em;" hidden>
+          <h3>Time converted to 💰</h3>
+          <table class="table table-hover">
+            <tbody>
+              <tr><th scope="row" style="width: 23%">...in hours:mm:ss</th><td id="time_to_work" class="h3" style="font-family:monospace;font-weight:bold;"></td></tr>
+              <tr><th scope="row">...in days</th><td id="days_to_work" class="h3" style="font-family:monospace;font-weight:bold;"></td></tr>
+              <tr><th scope="row">...in weeks</th><td id="weeks_to_work" class="h3" style="font-family:monospace;font-weight:bold;"></td></tr>
+              <tr><th scope="row">...yielding</th><td id="money_to_earn" class="h3" style="font-family:monospace;font-weight:bold;"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- RTFM -->
+      <div class="row" style="margin-top:4.2em;">
+        <!-- <label for="customization_toggle">Show customization</label> -->
+        <div class="container">
+          <span class="h5">Show options</span>
+          <input id="customization_toggle" type="checkbox">
+
+          <div id="manual" class="container" style="margin-top:0.66em;">
+            <p>
+              You can use the following URL GET parameters to customize your <i>Lifetime Clock</i>:
+            </p>
+            <table class="table table-hover">
+              <thead>
+                <tr><th scope="col">Parameter</th><th scope="col">Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>deathDate</code></td>
+                  <td>Assumed day of death in <code>YYYY-mm-dd</code> format, e.g. <code>2080-12-31</code>. Default: <code>2070-06-30</code></td>
+                </tr>
+                <tr>
+                  <td><code>regularHoursPerWeek</code></td>
+                  <td>Combined sleep, chore, commute, workout or other repetitive/scheduled hours per week, e.g. <code>70</code>. This is subtracted from your unbound time budget. Default: <code>0</code></td>
+                </tr>
+                <tr>
+                  <td><code>workingHoursPerWeek</code></td>
+                  <td>Working hours per week, e.g. <code>37.5</code>. This is subtracted from your time, but used for your monetary budget. Default: <code>0</code></td>
+                </tr>
+                <tr>
+                  <td><code>retirementDate</code></td>
+                  <td>Assumed last day of work in <code>YYYY-mm-dd</code> format, e.g. <code>2065-12-31</code>. Default: <code>2055-06-30</code></td>
+                </tr>
+                <tr>
+                  <td><code>headline</code></td>
+                  <td>Custom headline to personalize your clock, e.g. <code>Alice%27s%20Time</code>. Default: <code>Lifetime%20Clock</code></td>
+                </tr>
+                <tr>
+                  <td><code>angus</code></td>
+                  <td>??? 😉, <a href="https://giphy.com/gifs/acdc-angus-young-TIQKh7HNFvTmo">source image</a> (cropped and re-timed). Default: <code>null</code>.</td>
+                </tr>
+              </tbody>
+              <thead class="alert alert-danger">
+                <tr><th scope="col">WIP</th><th scope="col"></th></tr>
+              </thead>
+              <tbody class="alert alert-danger">
+                <tr>
+                  <td><code>hourlyNet</code><p class="blockquote-footer">works, but yearly raises (innovationRate) and inflation still need to be considered</p></td>
+                  <td>Hourly net income, e.g. <code>13.37</code>. Default: <code>0</code></td>
+                </tr>
+                <tr>
+                  <td><code>monthlyExpenses</code></td>
+                  <td>Not implemented</td>
+                </tr>
+                <tr>
+                  <td><code>decayRate</code></td>
+                  <td>Not implemented</td>
+                </tr>
+                <tr>
+                  <td><code>innovationRate</code></td>
+                  <td>Not implemented</td>
+                </tr>
+                <tr>
+                  <td><code>inflationRate</code></td>
+                  <td>Not implemented</td>
+                </tr>
+                <tr>
+                  <td><code>interestRate</code></td>
+                  <td>Not implemented</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="alert-warning">
+              <h6>Disclaimer</h6>
+              <p>
+                There are rounding errors due to using JavaScript Number objects instead of more mathematically accurate number representations. Also you might live longer or die earlier. Who knows? ¯\_(ツ)_/¯
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 💙 -->
+      <div class="row" style="margin-top:0.66em;">
+        <div class="container">
+          <p class="blockquote-footer" style="float:right;">crafted with ⏱ and 💙 by <a href="https://github.com/ooz">ooz</a> in Leipzig, Germany, 2017</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- App -->
+    <script type="text/javascript">
+function getParameters() {
+  const url = new URL(window.location.href)
+  return {
+    'deathDate' : url.searchParams.get('deathDate') || '2070-06-30',
+    'regularHoursPerWeek' : Number(url.searchParams.get('regularHoursPerWeek')),
+    'workingHoursPerWeek' : Number(url.searchParams.get('workingHoursPerWeek')),
+    'hourlyNet': Number(url.searchParams.get('hourlyNet')),
+    'retirementDate' : url.searchParams.get('deathDate') || '2055-06-30',
+    'headline' : url.searchParams.get('headline') || 'Lifetime Clock',
+    'angus' : url.searchParams.get('angus')
+  }
+}
+
+const PARAMETERS = getParameters()
+const DEATH_TIME = new Date(PARAMETERS.deathDate).getTime()
+const RETIREMENT_TIME = new Date(PARAMETERS.retirementDate).getTime()
+document.title = PARAMETERS.headline
+setText('headline', PARAMETERS.headline)
+if (PARAMETERS.angus !== null) { show('angus') }
+
+function get(id) {
+  return document.getElementById(id)
+}
+function hide(id) {
+  get(id).setAttribute('hidden', 'true')
+}
+function show(id) {
+  get(id).removeAttribute('hidden')
+}
+function setText(id, text) {
+  get(id).textContent = text
+}
+
+const SECONDS_PER_MINUTE = 60
+const SECONDS_PER_HOUR = SECONDS_PER_MINUTE * 60
+const SECONDS_PER_DAY = SECONDS_PER_HOUR * 24
+const SECONDS_PER_WEEK = SECONDS_PER_DAY * 7
+const MINUTES_PER_HOUR = 60
+const DECIMAL_PRECISION = 2
+
+function padPartialTime(time) {
+  return ("0" + time).slice(-2);
+}
+
+function update() {
+  const timeLeftInSeconds = Math.round((DEATH_TIME - new Date().getTime()) / 1000)
+  const workforceTimeLeftInSeconds = Math.round((RETIREMENT_TIME - new Date().getTime()) / 1000)
+
+  updateBasicClock(timeLeftInSeconds)
+  updateExtendedClock(timeLeftInSeconds, workforceTimeLeftInSeconds)
+  updateMoneyClock(timeLeftInSeconds, workforceTimeLeftInSeconds)
+}
+
+function calculateScales(timeLeftInSeconds) {
+  return {
+    'partialHours' : Math.floor(timeLeftInSeconds / SECONDS_PER_HOUR),
+    'partialMinutes' : Math.floor((timeLeftInSeconds % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE),
+    'partialSeconds' : Math.floor(timeLeftInSeconds % SECONDS_PER_MINUTE),
+    'hoursLeft' : Math.round(timeLeftInSeconds / SECONDS_PER_HOUR),
+    'daysLeft' : Math.round(timeLeftInSeconds / SECONDS_PER_DAY),
+    'weeksLeft' : Math.round(timeLeftInSeconds / SECONDS_PER_WEEK)
+  }
+}
+
+function formatPartialTimeLeft(scales) {
+  return scales.partialHours + ':' + padPartialTime(scales.partialMinutes) + ':' + padPartialTime(scales.partialSeconds)
+}
+function formatPercentage(rate) {
+  return Math.round(rate * 100) + '%'
+}
+
+function updateBasicClock(timeLeftInSeconds) {
+  const scales = calculateScales(timeLeftInSeconds)
+
+  setText('weeks_left', scales.weeksLeft)
+  setText('days_left', scales.daysLeft)
+  setText('time_left', formatPartialTimeLeft(scales))
+}
+
+function updateExtendedClock(timeLeftInSeconds, workforceTimeLeftInSeconds) {
+  if (PARAMETERS.regularHoursPerWeek !== 0 || PARAMETERS.workingHoursPerWeek !== 0) {
+    const regularSecondsPerWeek = PARAMETERS.regularHoursPerWeek * SECONDS_PER_HOUR
+    const workingSecondsPerWeek = PARAMETERS.workingHoursPerWeek * SECONDS_PER_HOUR
+
+    const boundSecondsPerWeek = regularSecondsPerWeek + workingSecondsPerWeek
+    const boundTimeRate = boundSecondsPerWeek / SECONDS_PER_WEEK
+    const workingUnboundTimeRate = 1 - boundTimeRate
+
+    const retiredTimeLeftInSeconds = timeLeftInSeconds - workforceTimeLeftInSeconds
+    const retiredUnboundTimeRate = 1 - regularSecondsPerWeek / SECONDS_PER_WEEK
+
+    const workingUnboundTimeInSeconds = workingUnboundTimeRate * workforceTimeLeftInSeconds
+    const retiredUnboundTimeInSeconds = retiredUnboundTimeRate * retiredTimeLeftInSeconds
+    const unboundTimeInSeconds = workingUnboundTimeInSeconds + retiredUnboundTimeInSeconds
+    const totalUnboundRate = unboundTimeInSeconds / timeLeftInSeconds
+    const scales = calculateScales(unboundTimeInSeconds)
+
+    setText('effective_time_left', formatPartialTimeLeft(scales)
+                                 + ' (' + formatPercentage(totalUnboundRate) + ') / '
+                                 + scales.daysLeft + ' days / '
+                                 + scales.weeksLeft + ' weeks')
+
+    show('effective_time_row')
+  }
+}
+
+let moneyToEarnSincePageLoad = null
+
+function updateMoneyClock(timeLeftInSeconds, workforceTimeLeftInSeconds) {
+  if (PARAMETERS.workingHoursPerWeek !== 0 && PARAMETERS.hourlyNet !== 0) {
+    const workingSecondsPerWeek = PARAMETERS.workingHoursPerWeek * SECONDS_PER_HOUR
+    const workingTimeRate = workingSecondsPerWeek / SECONDS_PER_WEEK
+    const workingTimeInSeconds = workingTimeRate * workforceTimeLeftInSeconds
+
+    const scales = calculateScales(workingTimeInSeconds)
+    const moneyPerSecond = PARAMETERS.hourlyNet / SECONDS_PER_HOUR
+    const moneyPerMinute = Number(PARAMETERS.hourlyNet / MINUTES_PER_HOUR).toFixed(DECIMAL_PRECISION)
+    const moneyToEarn = Number(workingTimeInSeconds * moneyPerSecond)
+    if (moneyToEarnSincePageLoad === null) { moneyToEarnSincePageLoad = moneyToEarn } // Lazy hack early in the mornin'
+    const formattedMoneyToEarn = moneyToEarn.toFixed(DECIMAL_PRECISION)
+    const totalWorkingTimeRate = workingTimeInSeconds / timeLeftInSeconds
+    const moneyEarnedSincePageLoad = Number(moneyToEarnSincePageLoad - moneyToEarn).toFixed(DECIMAL_PRECISION)
+
+    setText('weeks_to_work', scales.weeksLeft)
+    setText('days_to_work', scales.daysLeft)
+    setText('time_to_work', formatPartialTimeLeft(scales)
+                          + ' (' + formatPercentage(totalWorkingTimeRate)
+                          + '), ' + moneyPerMinute + ' 💰/min')
+    setText('money_to_earn', formattedMoneyToEarn + ' 💰 (' + moneyEarnedSincePageLoad + ' 💰 since page load)')
+
+    show('time_converted_to_money')
+  }
+}
+
+update()
+setInterval(function() {
+  update()
+}, 1000) // Once per second
+    </script>
+  </body>
+</html>
