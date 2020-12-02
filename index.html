@@ -17,14 +17,6 @@
     <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
     <meta name="theme-color" content="#ffffff">
-    <style>
-#manual {
-  display: none;
-}
-#customization_toggle:checked ~ #manual {
-  display: block;
-}
-    </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   </head>
   <body>
@@ -66,83 +58,84 @@
 
       <!-- RTFM -->
       <div class="row" style="margin-top:4.2em;">
-        <!-- <label for="customization_toggle">Show customization</label> -->
         <div class="container">
-          <span class="h5">Show options</span>
-          <input id="customization_toggle" type="checkbox">
-
-          <div id="manual" class="container" style="margin-top:0.66em;">
-            <p>
-              You can use the following URL GET parameters to customize your <i>Lifetime Clock</i>:
-            </p>
-            <table class="table table-hover">
-              <thead>
-                <tr><th scope="col">Parameter</th><th scope="col">Description</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>deathDate</code></td>
-                  <td>Assumed day of death in <code>YYYY-mm-dd</code> format, e.g. <code>2080-12-31</code>. Default: <code>2070-06-30</code></td>
-                </tr>
-                <tr>
-                  <td><code>regularHoursPerWeek</code></td>
-                  <td>Combined sleep, chore, commute, workout or other repetitive/scheduled hours per week, e.g. <code>70</code>. This is subtracted from your unbound time budget. Default: <code>0</code></td>
-                </tr>
-                <tr>
-                  <td><code>workingHoursPerWeek</code></td>
-                  <td>Working hours per week, e.g. <code>34.5</code>. This is subtracted from your time, but used for your monetary budget. Mind your vacation days and national holidays, so reduce your <code>workingHoursPerWeek</code> and increase your <code>hourlyNet</code> accordingly! Default: <code>0</code></td>
-                </tr>
-                <tr>
-                  <td><code>retirementDate</code></td>
-                  <td>Assumed last day of work in <code>YYYY-mm-dd</code> format, e.g. <code>2065-12-31</code>. Default: <code>2055-06-30</code></td>
-                </tr>
-                <tr>
-                  <td><code>headline</code></td>
-                  <td>Custom headline to personalize your clock, e.g. <code>Alice%27s%20Time</code>. Default: <code>Lifetime%20Clock</code></td>
-                </tr>
-                <tr>
-                  <td><code>angus</code></td>
-                  <td>??? 😉, <a href="https://giphy.com/gifs/acdc-angus-young-TIQKh7HNFvTmo">source image</a> (cropped and re-timed). Default: <code>null</code>.</td>
-                </tr>
-              </tbody>
-              <thead class="alert alert-danger">
-                <tr><th scope="col">WIP</th><th scope="col"></th></tr>
-              </thead>
-              <tbody class="alert alert-danger">
-                <tr>
-                  <td><code>hourlyNet</code><p class="blockquote-footer">works, but yearly raises (innovationRate) and inflation still need to be considered</p></td>
-                  <td>Hourly net income, e.g. <code>13.37</code>. Mind your vacation days and national holidays, so reduce your <code>workingHoursPerWeek</code> and increase your <code>hourlyNet</code> accordingly! Default: <code>0</code></td>
-                </tr>
-                <tr>
-                  <td><code>monthlyExpenses</code></td>
-                  <td>Not implemented</td>
-                </tr>
-                <tr>
-                  <td><code>decayRate</code></td>
-                  <td>Not implemented</td>
-                </tr>
-                <tr>
-                  <td><code>innovationRate</code></td>
-                  <td>Not implemented</td>
-                </tr>
-                <tr>
-                  <td><code>inflationRate</code></td>
-                  <td>Not implemented</td>
-                </tr>
-                <tr>
-                  <td><code>interestRate</code></td>
-                  <td>Not implemented</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="alert-warning">
-              <h6>Disclaimer</h6>
+          <details>
+            <summary>
+              <span class="h5">Customization options</span>
+            </summary>
+            <div id="manual" class="container">
               <p>
-                Timezone handling is ignored for now and there are rounding errors due to using JavaScript Number objects instead of more mathematically accurate number representations. Also you might live longer or die earlier. Who knows? ¯\_(ツ)_/¯
+                You can use the following URL GET parameters to customize your <i>Lifetime Clock</i>:
               </p>
-            </div>
+              <table class="table table-hover">
+                <thead>
+                  <tr><th scope="col">Parameter</th><th scope="col">Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>deathDate</code></td>
+                    <td>Assumed day of death in <code>YYYY-mm-dd</code> format, e.g. <code>2080-12-31</code>. Default: <code>2070-06-30</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>regularHoursPerWeek</code></td>
+                    <td>Combined sleep, chore, commute, workout or other repetitive/scheduled hours per week, e.g. <code>70</code>. This is subtracted from your unbound time budget. Default: <code>0</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>workingHoursPerWeek</code></td>
+                    <td>Working hours per week, e.g. <code>34.5</code>. This is subtracted from your time, but used for your monetary budget. Mind your vacation days and national holidays, so reduce your <code>workingHoursPerWeek</code> and increase your <code>hourlyNet</code> accordingly! Default: <code>0</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>retirementDate</code></td>
+                    <td>Assumed last day of work in <code>YYYY-mm-dd</code> format, e.g. <code>2065-12-31</code>. Default: <code>2055-06-30</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>headline</code></td>
+                    <td>Custom headline to personalize your clock, e.g. <code>Alice%27s%20Time</code>. Default: <code>Lifetime%20Clock</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>angus</code></td>
+                    <td>??? 😉, <a href="https://giphy.com/gifs/acdc-angus-young-TIQKh7HNFvTmo">source image</a> (cropped and re-timed). Default: <code>null</code>.</td>
+                  </tr>
+                </tbody>
+                <thead class="alert alert-danger">
+                  <tr><th scope="col">WIP</th><th scope="col"></th></tr>
+                </thead>
+                <tbody class="alert alert-danger">
+                  <tr>
+                    <td><code>hourlyNet</code><p class="blockquote-footer">works, but yearly raises (innovationRate) and inflation still need to be considered</p></td>
+                    <td>Hourly net income, e.g. <code>13.37</code>. Mind your vacation days and national holidays, so reduce your <code>workingHoursPerWeek</code> and increase your <code>hourlyNet</code> accordingly! Default: <code>0</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>monthlyExpenses</code></td>
+                    <td>Not implemented</td>
+                  </tr>
+                  <tr>
+                    <td><code>decayRate</code></td>
+                    <td>Not implemented</td>
+                  </tr>
+                  <tr>
+                    <td><code>innovationRate</code></td>
+                    <td>Not implemented</td>
+                  </tr>
+                  <tr>
+                    <td><code>inflationRate</code></td>
+                    <td>Not implemented</td>
+                  </tr>
+                  <tr>
+                    <td><code>interestRate</code></td>
+                    <td>Not implemented</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="alert-warning">
+                <h6>Disclaimer</h6>
+                <p>
+                  Timezone handling is ignored for now and there are rounding errors due to using JavaScript Number objects instead of more mathematically accurate number representations. Also you might live longer or die earlier. Who knows? ¯\_(ツ)_/¯
+                </p>
+              </div>
 
-          </div>
+            </div>
+          </details>
         </div>
       </div>
 
